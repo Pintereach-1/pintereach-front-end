@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import * as yup from 'yup'
 import axios from 'axios'
+import Info from './Info'
 
-export const Register = () => {
+ const Register = () => {
 
     const blankForm = {
         username:'',
@@ -14,9 +15,9 @@ export const Register = () => {
         password:''
     }
 
-    let defaultSchema = yup.object.shape({
-        username: yup.string().required('Please enter your username.'),
-        password: yup.string().required('Please enter your password.')
+    let defaultSchema = yup.object().shape({
+        username: yup.string().required('That is not a real name. Please try again.'),
+        password: yup.string().required('This is not a valid password.')
     })
 
     const [newForm, setForm] = useState(blankForm)
@@ -100,6 +101,17 @@ export const Register = () => {
                 </form>
             </div>
             
+            <div>
+                <p>Already have an Account?</p>
+                <div>Log in</div>
+            </div>
+
+            <div>
+                <Info></Info>
+            </div>
+
         </div>
     )
 }
+
+export default Register;

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import * as yup from 'yup'
 import axios from 'axios'
 
-export const Login = () => {
+const Login = () => {
 
     const blankForm = {
         username:'',
@@ -14,10 +14,10 @@ export const Login = () => {
         password:''
     }
 
-    let defaultSchema = yup.object.shape({
-        username: yup.string().required('Please enter your username.'),
-        password: yup.string().required('Please enter your password.')
-    })
+    let defaultSchema = yup.object().shape({
+        username: yup.string().required('That is not a real name. Please try again.'),
+        password: yup.string().required('This is not a valid password.')
+    }) 
 
     const [newForm, setForm] = useState(blankForm)
     const [newError, setError] = useState(defaultErrors)
@@ -100,6 +100,13 @@ export const Login = () => {
                 </form>
             </div>
             
+            <div>
+                <p>Or</p>
+                <div>Create an Account</div>
+            </div>
+
         </div>
     )
 }
+
+export default Login;
