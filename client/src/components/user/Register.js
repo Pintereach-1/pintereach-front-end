@@ -1,7 +1,9 @@
 import React from 'react'
+import * as yup from 'yup'
+import axios from 'axios'
 
 export const Register = () => {
-    
+
     const blankForm = {
         username:'',
         password:''
@@ -67,10 +69,10 @@ export const Register = () => {
 
             <div>
                 <form onSubmit={onSubmit}>
-                    <h1>Log In</h1>
+                    <h1>Register</h1>
                     <div>
                     <label htmlFor="username">
-                        <div>Username:</div>
+                        <div>Create Username:</div>
                         <input 
                         type="text"
                         name="username"
@@ -83,7 +85,7 @@ export const Register = () => {
                     </div>
                     <div>
                     <label htmlFor="password">
-                        <div>Username:</div>
+                        <div>Create Password:</div>
                         <input 
                         type="password"
                         name="password"

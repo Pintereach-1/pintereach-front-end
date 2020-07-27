@@ -85,7 +85,7 @@ export const Login = () => {
                     </div>
                     <div>
                     <label htmlFor="password">
-                        <div>Username:</div>
+                        <div>Password:</div>
                         <input 
                         type="password"
                         name="password"
