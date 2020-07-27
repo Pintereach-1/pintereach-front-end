@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import * as yup from 'yup'
 import axios from 'axios'
+import Info from './Info'
 
-export const Register = () => {
+ const Register = () => {
 
     const blankForm = {
         username:'',
@@ -100,6 +101,17 @@ export const Register = () => {
                 </form>
             </div>
             
+            <div>
+                <p>Already have an Account?</p>
+                <div>Log in</div>
+            </div>
+
+            <div>
+                <Info></Info>
+            </div>
+
         </div>
     )
 }
+
+export default Register;
