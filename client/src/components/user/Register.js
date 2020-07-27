@@ -2,6 +2,59 @@ import React, {useState, useEffect} from 'react'
 import * as yup from 'yup'
 import axios from 'axios'
 import Info from './Info'
+import styled from 'styled-components'
+
+const Details = styled.header`
+
+background-color:#C8D96F;
+color:#5C573E;
+min-height:10vh;
+display:flex;
+justify-content:space-around;
+align-items:center;
+
+a {
+  text-decoration:none;
+  color:ivory;
+}
+`
+
+const StyledButton = styled.button`
+background-color:#C8D96F;
+color:#5C573E;
+width:240px;
+height:33px;
+margin:10px;
+border-radius:10px;
+border:1px solid #5C573E;
+`
+
+const StyledInput = styled.input`
+width:240px;
+height:33px;
+border-radius:10px;
+border:1px solid;
+`
+
+const CenterP = styled.p`
+display:flex;
+justify-content:center;
+text-align:center;
+`
+
+const CenterDiv = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+background-color:white;
+color:black;
+border:1px solid black;
+width:35%;
+margin:5% auto;
+padding:2.5%;
+flex-direction:column;
+`
+
 
  const Register = () => {
 
@@ -68,13 +121,20 @@ import Info from './Info'
     return (
         <div>
 
-            <div>
+<Details>
+                <h2>Pintereach</h2>
+                <Link to="/">Home</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/register">Register</Link>
+            </Details>
+
+            <CenterDiv>
                 <form onSubmit={onSubmit}>
                     <h1>Register</h1>
                     <div>
                     <label htmlFor="username">
                         <div>Create Username:</div>
-                        <input 
+                        <StyledInput
                         type="text"
                         name="username"
                         onChange={onChange}
@@ -87,7 +147,7 @@ import Info from './Info'
                     <div>
                     <label htmlFor="password">
                         <div>Create Password:</div>
-                        <input 
+                        <StyledInput 
                         type="password"
                         name="password"
                         onChange={onChange}
@@ -97,18 +157,19 @@ import Info from './Info'
                         <p>{newError.password}</p>
                     </label>
                     </div>
-                    <button disabled={disableButton}>Submit</button>
+                    <StyledButton disabled={disableButton}>Submit</StyledButton>
                 </form>
-            </div>
-            
-            <div>
-                <p>Already have an Account?</p>
-                <div>Log in</div>
-            </div>
 
-            <div>
+                <CenterP>Already have an Account?</CenterP>
+                <StyledButton>Log in</StyledButton>
+
+                <div>
                 <Info></Info>
             </div>
+
+            </CenterDiv>
+        
+           
 
         </div>
     )
