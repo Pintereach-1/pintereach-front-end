@@ -165,8 +165,9 @@ const Login = () => {
 
           
              <CenterP>If you don't have an account, consider signing up:</CenterP>
+             <Link to="/register">
           < StyledButton>Create An Account</ StyledButton>
-       
+          </Link>
             </CenterDiv>
          
 
