@@ -3,6 +3,8 @@ import * as yup from 'yup'
 import axios from 'axios'
 import Info from './Info'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+
 
 const Details = styled.header`
 
