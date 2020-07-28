@@ -7,6 +7,7 @@ export const axiosWithAuth = () => {
         headers: {
             "content-type": "application/json",
             Authorization: localStorage.getItem('token')
-        }
+        },
+        baseURL: "https://karminer60-pintereach.herokuapp.com"
     })
 }
