@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 
+
+
 const Details = styled.header`
 
 background-color:#C8D96F;
@@ -163,10 +165,12 @@ flex-direction:column;
                 </form>
 
                 <CenterP>Already have an Account?</CenterP>
+                <Link to="/login">
                 <StyledButton>Log in</StyledButton>
+                </Link>
 
                 <div>
-                <Info></Info>
+                <Info />
             </div>
 
             </CenterDiv>
