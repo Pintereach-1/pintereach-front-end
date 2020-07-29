@@ -1,56 +1,65 @@
-import React, { useEffect } from "react";
-// import {Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { NavBar } from "./NavBar";
 import { BoardForm } from "../board/BoardForm";
 
+// import axios from 'axios'
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-export const Dashboard = () =>{
+// export const Dashboard = () =>{
+//   const [catergories, setCategories] = useState([])
   
-  
-  useEffect(() => {
-    // const user_id = localStorage.getItem("user id");
-    //getBoards(user_id)
-  }, [])
+// console.log(catergories)
+
+//   useEffect(() => {
+//     axiosWithAuth()
+//    .get('https://karminer60-pintereach.herokuapp.com/categories/categories')
+//    .then(res =>{
+//     setCategories(res.data)
+//     })
+   
+//    .catch(err =>{console.log(err)})
+//   }, [])
   
     
-  //deleteBoard handle
+//   //deleteBoard handle
 
    
-    return (
-      <div className="">
-        <NavBar />
-        <div className="">
-          <BoardForm />
-        </div>
+//     return (
+//       <div className="">
+//         <NavBar />
+//         <div className="">
+//           <BoardForm />
+//         </div>
     
-        {/* <div className="">
-          {boards.map(board => {
-            return (
-              <div className="" key={board.id}>
-                <Link
-                  className=""
-                  to={`/dashboard/${board.id}`}
-                  key={board.id}
-                >
-                  <i className="" id="" />
-                  <h1>{board.board_title}</h1>
-                </Link>
-                <button
-                  className=""
-                  to="/dashboard"
-                //   onClick={() => deleteBoard(board.id)}
-                >
-                  Delete Board
-                </button>
-              </div>
-            );
-          })}
-        </div> */}
-      </div>
-    );
-  }
+//         <div className="">
+//           {catergories.map(category => {
+//             return (
+//               <div className="" key={category.categoryid}>
+//                 <Link
+//                   className=""
+//                   to={`/dashboard/${category.categoryid}`}
+//                   key={category.id}
+//                 >
+//                   <i className="" id="" />
+//                   <h1>{category.categoryName}</h1>
+//                 </Link>
+//                 <button
+//                   className=""
+//                   to="/dashboard"
+//                 //   onClick={() =>}
+//                 >
+//                   Delete Board
+//                 </button>
+//               </div>
+//             );
+//           })}
+//         </div>
+//       </div>
+//     );
+//   }
 
 
 const mapStateToProps = state => ({
