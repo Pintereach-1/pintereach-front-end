@@ -1,18 +1,18 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 
-const CenterDiv = styled.div`
-display:flex;
-justify-content:center;
-align-items:center;
-background-color:white;
-color:black;
-border:1px solid black;
-width:35%;
-margin:5% auto;
-padding:2.5%;
-flex-direction:column;
-`
+// const CenterDiv = styled.div`
+// display:flex;
+// justify-content:center;
+// align-items:center;
+// background-color:white;
+// color:black;
+// border:1px solid black;
+// width:35%;
+// margin:5% auto;
+// padding:2.5%;
+// flex-direction:column;
+// `
 
 const InfoDiv = styled.div`
 margin:10% auto;
@@ -39,15 +39,15 @@ border:1px solid #5C573E;
 font-size:.85rem;
 `
 
-const StyledButton = styled.button`
-background-color:#C8D96F;
-color:#5C573E;
-width:240px;
-height:33px;
-margin:10px;
-border-radius:10px;
-border:1px solid #5C573E;
-`
+// const StyledButton = styled.button`
+// background-color:#C8D96F;
+// color:#5C573E;
+// width:240px;
+// height:33px;
+// margin:10px;
+// border-radius:10px;
+// border:1px solid #5C573E;
+// `
 
 const Info = () => {
 

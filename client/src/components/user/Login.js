@@ -1,178 +1,87 @@
-import React, {useState, useEffect} from 'react'
-import * as yup from 'yup'
+import React from 'react';
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL } from '../../store/actions';
+
+import * as yup from "yup";
 import axios from 'axios'
-import styled from 'styled-components'
-import {Switch, Link, Route} from 'react-router-dom'
-import Register from './Register'
+import querystring from 'querystring';
+const schema = yup.object().shape({
+    username: yup.string().required("Username is Required"),
+    password: yup.string().required("Password is Required"),
+});
 
 
-const Details = styled.header`
-
-background-color:#C8D96F;
-color:#5C573E;
-min-height:10vh;
-display:flex;
-justify-content:space-around;
-align-items:center;
-
-a {
-  text-decoration:none;
-  color:ivory;
-}
-`
-
-const StyledButton = styled.button`
-background-color:#C8D96F;
-color:#5C573E;
-width:240px;
-height:33px;
-margin:10px;
-border-radius:10px;
-border:1px solid #5C573E;
-`
-
-const StyledInput = styled.input`
-width:240px;
-height:33px;
-border-radius:10px;
-border:1px solid;
-`
-
-const CenterP = styled.p`
-display:flex;
-justify-content:center;
-text-align:center;
-`
-
-const CenterDiv = styled.div`
-display:flex;
-justify-content:center;
-align-items:center;
-background-color:white;
-color:black;
-border:1px solid black;
-width:35%;
-margin:5% auto;
-padding:2.5%;
-flex-direction:column;
-`
-
-
-
-
-const Login = () => {
-
-    const blankForm = {
-        username:'',
-        password:''
+function Login(props) {
+    const { register, handleSubmit, errors, getValues } = useForm({
+        validationSchema: schema,
+    });
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const onSubmit = () => {
+        
+        dispatch({ type: LOGIN_START });
+        const values = getValues();
+            axios.post('https://karminer60-pintereach.herokuapp.com/login', 
+            querystring.encode({ grant_type: 'password', ...values }), {
+                headers: {
+                  // btoa is converting our client id/client secret into base64
+                  Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                }
+              })
+            .then((res) => {
+                console.log(res.data.access_token);
+                localStorage.setItem("token", res.data.access_token);
+                dispatch({ type: LOGIN_SUCCESS, payload: res.access_token });
+                console.log(res);
+                history.push("/dashboard");
+            })
+            .catch((err) => {
+                dispatch({ type: LOGIN_FAIL, payload: err });
+                console.log(err);
+            });
     }
-
-    const defaultErrors = {
-        username:'',
-        password:''
-    }
-
-    let defaultSchema = yup.object().shape({
-        username: yup.string().required('That is not a real name. Please try again.'),
-        password: yup.string().required('This is not a valid password.')
-    }) 
-
-    const [newForm, setForm] = useState(blankForm)
-    const [newError, setError] = useState(defaultErrors)
-    const [disableButton, setButton] = useState(true)
-    const [newUser, setUser] = useState([])
-
-    useEffect( () => {
-        defaultSchema.validate(newForm)
-        .then(valid => setButton(!valid) )
-    },[newForm,defaultSchema])
-
-    const validationCheck = (event) => {
-        event.persist()
-        yup.reach(defaultSchema, event.target.name)
-        .validate(event.target.value)
-        .then(valid => setError( 
-            {...newError, [event.target.name]:''}
-        ))
-        .catch(error => setError(
-            {...newError, [event.target.name]: error.newError[0]}
-        ))
-    }
-
-    const onSubmit = (event) => {
-        event.preventDefault()
-        console.log('submit start')
-        axios.post('https://reqres.in/api/users', newForm)
-        .then(value => {
-            const user = value.data
-            setUser([user],...newUser)
-            setUser(value.data) 
-        })
-        .catch(error => {
-            console.log(error, 'submit error')
-        })
-    }
-
-    const onChange = (event) => {
-        const value = event.target.value
-        setForm ({...newForm, [event.target.name]: value})
-        validationCheck(event)
-    }
-
-    let userDisplay = JSON.stringify(newUser)
-    console.log(userDisplay)
-
     return (
-        <div>
-            <Details>
-                <h2>Pintereach</h2>
-                <Link to="/">Home</Link>
-                <Link to="/login">Login</Link>
-                <Link to="/register">Register</Link>
-            </Details>
-
-            <CenterDiv>
-                <form onSubmit={onSubmit}>
-                    <h1>Log In</h1>
-                    <div>
-                    <label htmlFor="username">
-                        <div>Username:</div>
-                        <StyledInput 
-                        type="text"
-                        name="username"
-                        onChange={onChange}
-                        value={newForm.username}
-                        errors={newError}
-                        />
-                        <p>{newError.username}</p>
-                    </label>
+        <form onSubmit={e => {
+            handleSubmit(onSubmit)(e);
+        }}>
+           
+                    <h2>Login</h2>
+                    <div className="errors">
+                        <p>
+                            {errors.username && errors.username.message}
+                        </p>
+                        <p>
+                            {errors.password && errors.password.message}
+                        </p>
                     </div>
-                    <div>
-                    <label htmlFor="password">
-                        <div>Password:</div>
-                        <StyledInput
-                        type="password"
-                        name="password"
-                        onChange={onChange}
-                        value={newForm.password}
-                        errors={newError}
+               
+                
+                    <label>Username&nbsp;
+                    <input
+                            ref={register}
+                            name='username'
+                            type='text'
                         />
-                        <p>{newError.password}</p>
                     </label>
-                    </div>
-                    <StyledButton disabled={disableButton}>Submit</StyledButton>
-                </form>
-
-          
-             <CenterP>If you don't have an account, consider signing up:</CenterP>
-             <Link to="/register">
-          < StyledButton>Create An Account</ StyledButton>
-          </Link>
-            </CenterDiv>
-         
-
-        </div>
+                
+               
+                    <label>Password&nbsp;
+                    <input
+                            ref={register}
+                            name='password'
+                            type='password'
+                        />
+                    </label>
+               
+                <button>Login</button>
+                <h3 color='muted'>Don't have an account? <Link to='/register'>Register Here!</Link></h3>
+            
+        </form>
     )
 }
-
 export default Login;
+
