@@ -1,13 +1,10 @@
 import axios from 'axios';
-
 export const axiosWithAuth = () => {
-    
-    console.log(localStorage.getItem('token'))
+    const token = window.localStorage.getItem('token');
     return axios.create({
         headers: {
-            "content-type": "application/json",
-            Authorization: localStorage.getItem('token')
+            Authorization: `Bearer ${token}`
         },
-        baseURL: "https://karminer60-pintereach.herokuapp.com"
-    })
+        baseURL: 'https://karminer60-pintereach.herokuapp.com'
+    });
 }
