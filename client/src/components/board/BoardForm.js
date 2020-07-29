@@ -12,7 +12,7 @@ export const BoardForm = () => {
                 <input 
                 type="text"
                 name="board_title"
-                placeholder="Catergory"
+                placeholder="Describe Catergory"
                 />
                 <input 
                 type="text"

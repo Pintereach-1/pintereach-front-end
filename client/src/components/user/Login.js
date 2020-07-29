@@ -70,17 +70,19 @@ function Login() {
                         </p>
                     </div>
 
-                    <div>Username&nbsp;</div>
+
 
                     <StyledInput
+                        placeholder="Username"
                         ref={register}
                         name='username'
                         type='text'
                     />
 
 
-                    <div>Password&nbsp;</div>
+
                     <StyledInput
+                        placeholder="Password"
                         ref={register}
                         name='password'
                         type='password'
