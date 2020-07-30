@@ -66,3 +66,30 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+Here are all the user endpoints:
+| POST   | /createnewuser   |
+| POST   |  /login      |
+| GET    | users/users          | Get all users
+| GET    | /user/{userid}      | Get user by user id
+| GET    | /user/name/{username} | Get user by username
+| GET    | /user/name/like/{username} | Get user using part of username
+| POST   | /user | Post a new user
+| PUT    | /user/{userid}      | Edit a user using user id
+| DELETE | /user/{userid}      | Delete a user using user id
+Here are all the article endpoints:
+*All requests restricted to data belonging to logged in user
+| GET    | articles/articles          | Get all articles
+| GET    | /article/{articleid}      | Get an article by id
+| POST   | /category/{categoryid} | Post an article into a category
+| PUT    | /article/{articleid}      | Edit an article using  article id
+| DELETE | /article/{articleid}      | Delete an article using article id
+Here are all the category endpoints:
+*All requests restricted to data belonging to logged in user
+| GET    | categories/categories          | Get all categories belonging to logged in user
+| GET    | /category/{categoryid}      | Get one category using category id
+| POST   | /category | Post a category
+| PUT    | /category/{categoryid}      | Edit a category
+| DELETE | /category/{categoryid}      | Delete a category (edited) 
