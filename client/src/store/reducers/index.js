@@ -1,14 +1,21 @@
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL } from "../actions";
+import {
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  REGISTER_START,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+} from "../actions";
 
 const initialState = {
-    articles: [],
-    boards: [],
-    user_info: {},
-    error: '',
-    isLoading: false,
-    isLoggingIn: false,
-}
-
+  articles: [],
+  boards: [],
+  user_info: {},
+  error: "",
+  isLoading: false,
+  isLoggingIn: false,
+  isRegistering: false,
+};
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -16,20 +23,40 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggingIn: true,
-        error: ""
+        error: "",
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isLoggingIn: false
+        isLoggingIn: false,
       };
     case LOGIN_FAIL:
       return {
         ...state,
         error: action.payload,
-        isLoggingIn: false
+        isLoggingIn: false,
       };
+
+    case REGISTER_START:
+      return {
+        ...state,
+        isRegistering: true,
+        error: "",
+      };
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        isRegistering: false,
+        error: "",
+      };
+    case REGISTER_FAIL:
+      return {
+        ...state,
+        isRegistering: false,
+        error: action.payload,
+      };
+
     default:
-        return state;
-    }
-  };
+      return state;
+  }
+};
