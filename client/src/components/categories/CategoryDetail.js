@@ -4,19 +4,20 @@ import React, { useEffect } from 'react'
 // import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getArticles } from '../../store/actions'
+import { useParams } from 'react-router-dom'
 
 
 export const CategoryDetail = () => {
     const dispatch = useDispatch()
     const articles = useSelector(state => state.articles)
-    
+     const {id} = useParams()
     
 
 console.log("ARTICLES",articles)
     useEffect(() => {
-        dispatch(getArticles())
+        dispatch(getArticles(id))
         // eslint-disable-next-line
-        }, [])
+        }, [id])
     return (
         <div>
     
