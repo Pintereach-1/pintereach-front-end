@@ -1,4 +1,6 @@
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL } from "../actions";
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL,
+   FETCH_BOARDS_SUCCESS, FETCH_BOARDS_FAIL, FETCH_BOARDS_START
+   } from "../actions";
 
 const initialState = {
     articles: [],
@@ -29,6 +31,22 @@ export const reducer = (state = initialState, action) => {
         error: action.payload,
         isLoggingIn: false
       };
+      case FETCH_BOARDS_START: 
+      return {
+          ...state,
+          isLoading: true
+      }
+      case FETCH_BOARDS_SUCCESS:
+      return {
+          ...state,
+          isLoading: false,
+          boards: action.payload
+      }
+      case FETCH_BOARDS_FAIL:
+      return {
+          ...state,
+          error: action.payload
+      }
     default:
         return state;
     }

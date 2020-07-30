@@ -1,59 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {Link } from "react-router-dom";
-import { connect } from "react-redux";
-
-import { NavBar } from "./NavBar";
 import { BoardForm } from "../board/BoardForm";
+import { useDispatch, useSelector } from "react-redux";
+import { getBoards } from "../../store/actions";
 
-// import axios from 'axios'
-import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
-export const Dashboard = () =>{
-  const [catergories, setCategories] = useState([])
-  
-console.log(catergories)
+export const Dashboard = ({}) =>{
+const dispatch = useDispatch()
+const categories = useSelector(state => state.boards)
 
   useEffect(() => {
-    axiosWithAuth()
-   .get('https://karminer60-pintereach.herokuapp.com/categories/categories')
-   .then(res =>{
-    setCategories(res.data)
-    })
-   
-   .catch(err =>{console.log(err)})
+  dispatch(getBoards())
+  // eslint-disable-next-line
   }, [])
-  
-    
-  //deleteBoard handle
 
-   
     return (
       <div className="">
-        <NavBar />
         <div className="">
           <BoardForm />
         </div>
     
         <div className="">
-          {catergories.map(category => {
+        
+          {categories.map(category => {
             return (
-              <div className="" key={category.categoryid}>
-                <Link
-                  className=""
-                  to={`/dashboard/${category.categoryid}`}
-                  key={category.id}
-                >
-                  <i className="" id="" />
-                  <h1>{category.categoryName}</h1>
-                </Link>
-                <button
-                  className=""
-                  to="/dashboard"
-                //   onClick={() =>}
-                >
-                  Delete Board
-                </button>
-              </div>
+              <Link to={`board/${category.categoryid}`} key={category.categoryid}>
+              <h1>{category.categoryName}</h1>
+              </Link>
+            
             );
           })}
         </div>
@@ -62,13 +36,3 @@ console.log(catergories)
   }
 
 
-const mapStateToProps = state => ({
-  boards: state.boards,
-});
-
-console.log();
-
-export default connect(
-  mapStateToProps,
-//   { getBoards, deleteBoard, editBoard }
-)(Dashboard);
