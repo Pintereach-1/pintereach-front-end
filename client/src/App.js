@@ -19,11 +19,10 @@ function App() {
 
   return (
     <div>
-
-      <Route  path='/' component={NavBar} />
+      <NavBar />
       <Route path='/login' component={Login} />
       <Route path='/register' component={Register} />
-      <PrivateRoute path='/user' component={UserProfile} />
+      <PrivateRoute exact path='/' component={UserProfile} />
       <PrivateRoute path='/dashboard' component={Dashboard} />  
       <Route exact path='/dashboard/:id' component={CategoryDetail} />
     </div>
