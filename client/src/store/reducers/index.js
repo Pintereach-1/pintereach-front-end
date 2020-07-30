@@ -6,6 +6,7 @@ import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL,
    } from "../actions";
 
 const initialState = {
+    articles: [],
     boards: [],
     error: '',
     isLoading: false,

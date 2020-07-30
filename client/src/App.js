@@ -23,8 +23,8 @@ function App() {
       <Route path='/login' component={Login} />
       <Route path='/register' component={Register} />
       <PrivateRoute exact path='/' component={UserProfile} />
-      <PrivateRoute path='/dashboard' component={Dashboard} />  
-      <Route exact path='/dashboard/:id' component={CategoryDetail} />
+      <PrivateRoute exact path='/dashboard' component={Dashboard} />  
+      <Route  path='/dashboard/:id' component={CategoryDetail} />
     </div>
   );
 }

@@ -86,12 +86,12 @@ export const FETCH_ARTICLES_START = 'FETCH_ARTICLES_START'
 export const FETCH_ARTICLES_SUCCESS = 'FETCH_ARTICLES_SUCCESS'
 export const FETCH_ARTICLES_FAIL = 'FETCH_ARTICLES_FAIL'
 
-export const getArticles =(id) => dispatch => {
+export const getArticles =() => dispatch => {
     dispatch({ type: FETCH_ARTICLES_START })
     axiosWithAuth()
-    .get(`/articles/article/${id}`)
+    .get(`/articles/articles/`)
     .then(res => {
-        console.log(res)
+        console.log("getArticles ",res)
         dispatch({ type: FETCH_ARTICLES_SUCCESS, payload: res.data })
     })
     .catch(err => {
