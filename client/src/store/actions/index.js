@@ -20,8 +20,7 @@ export const getBoards = () => dispatch => {
     // .get(`/article/${id}`)
     
     .then(res => {
-        // debugger;
-        console.log(res)
+    
         dispatch({ type: FETCH_BOARDS_SUCCESS, payload: res.data})
     })
     .catch(err => {
@@ -37,14 +36,12 @@ export const POST_BOARDS_FAIL = 'POST_BOARDS_FAIL'
 
 export const postBoard = (board) => dispatch => {
     dispatch({ type: POST_BOARDS_START })
-    
-    console.log("postBoard after submit", board)
+
     axiosWithAuth()
     .post(`/categories/category`, board) 
     // .post(`/category/${11}`, board) 
     // .post(`https://reqres.in/api/users`, board)
     .then (res => {
-        
         dispatch({ type: POST_BOARDS_SUCCESS, payload: res.data})
     
     })
@@ -66,7 +63,7 @@ export const deleteBoard = id => dispatch => {
     axiosWithAuth()
     .delete(`/categories/category/${id}`)
     .then(res => {
-        console.log(res)
+        
         dispatch({ type: DELETE_BOARD_SUCCESS, payload: id })
     })
     .catch(err => {
@@ -78,7 +75,46 @@ export const deleteBoard = id => dispatch => {
 
 
 // Edit Boards Title
+export const EDIT_ARTICLE_START = 'EDIT_ARTICLE_START'
+export const EDIT_ARTICLE_SUCCESS = 'EDIT_ARTICLE_SUCCESS'
+export const EDIT_ARTICLE_FAIL = 'EDIT_ARTICLE_FAIL'
 
+export const editBoard = (id, board) => dispatch => {
+    dispatch ({type: EDIT_ARTICLE_START})
+    axiosWithAuth()
+    .put(`/categories/category/${id}`, board)
+    // .put(`https://reqres.in/api/users/${id}`, board)
+    .then(res =>{
+        dispatch({ type: EDIT_ARTICLE_SUCCESS, payload: res.data})
+    })
+    
+    .catch(err => {console.log(err)
+        dispatch({ type: EDIT_ARTICLE_FAIL, payload: err.data})
+    })
+}
+
+// Fetch Boards By Id
+
+export const FETCH_BOARD_START = 'FETCH_BOARD_START'
+export const FETCH_BOARD_SUCCESS= 'FETCH_BOARD_SUCCESS'
+export const FETCH_BOARD_FAIL= 'FETCH_BOARD_FAIL'
+
+export const getBoard = (id) => dispatch => {
+    
+    dispatch({ type: FETCH_BOARD_START })
+    axiosWithAuth()
+    .get(`/categories/category/${id}`)
+    // .get(`https://reqres.in/api/users/${id}`)
+    
+    
+    .then(res => {
+        dispatch({ type: FETCH_BOARD_SUCCESS, payload: res.data})
+    })
+    .catch(err => {
+        console.log(err)
+        dispatch({ type: FETCH_BOARD_FAIL, payload: err.data})
+    })
+}
 
 
 // Fetch Articles
@@ -86,12 +122,12 @@ export const FETCH_ARTICLES_START = 'FETCH_ARTICLES_START'
 export const FETCH_ARTICLES_SUCCESS = 'FETCH_ARTICLES_SUCCESS'
 export const FETCH_ARTICLES_FAIL = 'FETCH_ARTICLES_FAIL'
 
-export const getArticles =(id) => dispatch => {
+export const getArticles =() => dispatch => {
     dispatch({ type: FETCH_ARTICLES_START })
     axiosWithAuth()
-    .get(`/articles/article/${id}`)
+    .get(`/articles/articles/`)
     .then(res => {
-        console.log(res)
+        
         dispatch({ type: FETCH_ARTICLES_SUCCESS, payload: res.data })
     })
     .catch(err => {
@@ -99,3 +135,5 @@ export const getArticles =(id) => dispatch => {
         dispatch({ type: FETCH_ARTICLES_FAIL })
     })
 }
+
+

@@ -1,22 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CategoryForm } from "../categories/CategoryForm";
 import { useDispatch, useSelector } from "react-redux";
-import { getBoards, deleteBoard } from "../../store/actions";
+import { getBoards, deleteBoard, editBoard } from "../../store/actions";
 import { CategoryCard } from "../categories/CategoryCard";
-// import { useParams } from "react-router-dom";
+import { EditCategory } from "../categories/EditCategory";
+import { useParams } from "react-router-dom";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 // import { SingleBoard } from "../board/SingleBoard";
 
 
 export const Dashboard = () => {
-  const dispatch = useDispatch()
+  const [eiditng, setEditing] = useState(false)
+  const [inputEdit, setInputEdit] = useState({
+    categoryName: ''
+  })
   const categories = useSelector(state => state.boards)
-  // const { id } = useParams()
+  const dispatch = useDispatch()
+  const { id } = useParams()
+
+
+
+  const editCategory = category => {
+    setEditing(true);
+    setInputEdit(category);
+  };
+
+  const saveEdit = () => {
+    dispatch(editBoard(categories.categoryid))
+    setEditing(false)
+  }
+
+
 
   useEffect(() => {
-    dispatch(getBoards())
+    dispatch(getBoards(id))
 
     // eslint-disable-next-line
-  }, [])
+  }, [id])
+
 
 
   return (
@@ -26,9 +47,17 @@ export const Dashboard = () => {
       </div>
 
       <div className="">
-
-
         {categories.map(category => {
+          // console.log("Categories State", category.articles)
+          if (eiditng === true) {
+            return (
+              <EditCategory
+                key={category.categoryid}
+                category={category}
+
+              />
+            );
+          }
           return (
             <div className="" key={category.categoryid}>
 
@@ -43,9 +72,9 @@ export const Dashboard = () => {
                 </button>
               <button
                 className=""
-              // onClick={() => dispatch(editBoard(category.categoryid))}
+                onClick={() => dispatch(editBoard(category.categoryid))}
               >
-                Edit Board
+                Save Change
                 </button>
             </div>
 
