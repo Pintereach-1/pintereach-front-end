@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { editUser } from '../../store/actions';
-
+import { useHistory } from 'react-router-dom'
 
 
 class EditUser extends React.Component {
@@ -13,6 +13,7 @@ class EditUser extends React.Component {
             
         }
     }
+
 
     handleChanges = event => {
         this.setState({
@@ -33,7 +34,7 @@ class EditUser extends React.Component {
     render() {
         return (
           <div className='login-container'>
-            <form className='login-form' onSubmit={this.editUser}>
+            <form className='login-form' onSubmit={this.editUser} >
             <h1>Edit User</h1> 
               <input  name='username' required value={this.state.inputValue.first_name} onChange={this.handleChanges} />
 
