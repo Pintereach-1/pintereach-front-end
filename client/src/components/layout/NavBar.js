@@ -16,7 +16,7 @@ export const NavBar = () => {
                 <NavLink className="" to="/dashboard">
                     Dashboard
                 </NavLink>
-                <NavLink className="" to="/">
+                <NavLink className="" to="/user">
                     Profile
                 </NavLink>
                 <NavLink className="" to="/login">

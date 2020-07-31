@@ -12,7 +12,7 @@ export const CategoryDetail = () => {
     const articles = useSelector(state => state.articles)
      const {id} = useParams()
     
- 
+ console.log(articles)
 
 useEffect(() => {
     dispatch(getArticles())
@@ -28,7 +28,6 @@ return (
             articles.length > 0 && 
             
             articles.map(article => {
-                // console.log("Mapped", id);
                   {
                     return (
                         
@@ -37,7 +36,7 @@ return (
                             {  (
                                 <div key={article.articleid}>
                                     <h3>{article.title}</h3>
-                                    <Link to={article.imageUrl}>{article.imageUrl}</Link>
+                                    <Link to={article.imageUrl}>{article.url}</Link>
                                 </div>
                             )}
                         </div>

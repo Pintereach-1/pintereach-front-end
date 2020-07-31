@@ -1,4 +1,8 @@
 import { axiosWithAuth } from "../../utils/axiosWithAuth"
+import { history } from "../../utils/history"
+
+
+
 
 // Login Actions
 export const LOGIN_START = 'LOGIN_START'
@@ -24,6 +28,45 @@ export const getBoards = () => dispatch => {
         dispatch({ type: FETCH_BOARDS_SUCCESS, payload: res.data})
     })
     .catch(err => {
+        console.log(err)
+    })
+}
+
+
+export const GET_USER_INFO = 'GET_USER_INFO'
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
+export const GET_USER_FAIL = 'GET_USER_FAIL'
+
+export const getUserInfo = () => dispatch => {
+    dispatch({ type: GET_USER_INFO })
+    axiosWithAuth()
+    // .get(`/user/name/${username}`)
+    .get(`https://reqres.in/api/users/1`)
+    .then(res => {
+        dispatch({ type: GET_USER_SUCCESS, payload: res.data.data })
+    })
+    .catch(err => {
+        dispatch({ type: GET_USER_FAIL })
+        console.log(err)
+    })
+}
+
+
+export const EDIT_USER_START = 'EDIT_USER_START'
+export const EDIT_USER_SUCCESS = 'EDIT_USER_SUCCESS'
+export const EDIT_USER_FAIL = 'EDIT_USER_FAIL'
+
+export const editUser = user => dispatch => {
+    
+    dispatch({ type: EDIT_USER_START })
+    axiosWithAuth()
+    .put(`https://reqres.in/api/users/1`, user)
+    .then(res => {
+        dispatch({ type: EDIT_USER_SUCCESS, payload: res.data })
+            
+    })
+    .catch(err => {
+        dispatch({ type: EDIT_USER_FAIL })
         console.log(err)
     })
 }
