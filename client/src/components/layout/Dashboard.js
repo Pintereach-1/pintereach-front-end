@@ -5,6 +5,7 @@ import { getBoards, deleteBoard, editBoard } from "../../store/actions";
 import { CategoryCard } from "../categories/CategoryCard";
 // import { EditCategory } from "../categories/EditCategory";
 import { useParams } from "react-router-dom";
+import styled from 'styled-components'
 
 
 
@@ -50,30 +51,38 @@ export const Dashboard = () => {
             <div className="" key={category.categoryid}>
 
               {/* <i className="fas fa-clipboard-list" id="board-icon" /> */}
+              <StyledCategoryCard>
               <CategoryCard category={category} />
 
               {(
                 <form onSubmit={() => dispatch(editBoard(category.categoryid))}>
-                  <legend>edit category</legend>
+                  <legend>edit category&nbsp;</legend>
+                  <br/>
                   <label>
-                    Category
+                    Category&nbsp;
+                    
       <input
                       onChange={e => setInputEdit({ ...inputEdit, name: e.target.value })}
                       value={inputEdit.category}
                     />
+                    
                   </label>
-
+                  
                   <div>
-                    <button type="submit">save</button>
+                  <br/>
+                    <button type="submit">save&nbsp;</button>
+                    
                     <button onClick={() => setEditing(false)}>cancel</button>
+                    
                   </div>
+                  <br/>
                 </form>
               )}
               <button
                 className=""
                 onClick={() => dispatch(deleteBoard(category.categoryid))}
               >
-                Delete Board
+                Delete Board&nbsp;
                 </button>
               {/* <button
                 className=""
@@ -87,7 +96,7 @@ export const Dashboard = () => {
               > */}
               {/* Save Change
                 </button> */}
-
+            </StyledCategoryCard>
             </div>
           );
         })}
@@ -95,5 +104,19 @@ export const Dashboard = () => {
     </div>
   );
 }
+
+
+
+
+const StyledCategoryCard = styled.button`
+background-color:#C8D96F;
+color:#5C573E;
+margin:100px;
+padding: 20px;
+border-radius:10px;
+border:1px solid #5C573E;
+`
+
+
 
 
