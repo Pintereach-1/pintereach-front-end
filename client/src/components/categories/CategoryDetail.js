@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getArticles } from '../../store/actions'
 import { useParams } from 'react-router-dom'
 import { ArticleForm } from '../article/ArticleForm'
+import styled from 'styled-components'
 
 export const CategoryDetail = () => {
     const dispatch = useDispatch()
