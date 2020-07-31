@@ -24,7 +24,7 @@ function App() {
       <Route path='/register' component={Register} />
       <PrivateRoute exact path='/' component={UserProfile} />
       <PrivateRoute exact path='/dashboard' component={Dashboard} />  
-      <Route  path='/dashboard/:id' component={CategoryDetail} />
+      <Route path='/dashboard/:id' component={CategoryDetail} />
     </div>
   );
 }

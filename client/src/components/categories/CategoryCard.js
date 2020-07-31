@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const CategoryCard = (props) => {
 
-    console.log("Category Card", props.category.categoryid)
+
 
 
 

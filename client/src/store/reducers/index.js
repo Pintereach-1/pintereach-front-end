@@ -2,7 +2,9 @@ import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAIL,
    FETCH_BOARDS_SUCCESS, FETCH_BOARDS_FAIL, FETCH_BOARDS_START, 
    POST_BOARDS_START, POST_BOARDS_SUCCESS, POST_BOARDS_FAIL, 
    DELETE_BOARD_START, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAIL, 
-   FETCH_ARTICLES_START, FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_FAIL
+   FETCH_ARTICLES_START, FETCH_ARTICLES_SUCCESS, FETCH_ARTICLES_FAIL, 
+   EDIT_ARTICLE_START, EDIT_ARTICLE_SUCCESS, EDIT_ARTICLE_FAIL, 
+   FETCH_BOARD_SUCCESS, FETCH_BOARD_FAIL, FETCH_BOARD_START
    } from "../actions";
 
 const initialState = {
@@ -11,6 +13,7 @@ const initialState = {
     error: '',
     isLoading: false,
     isLoggingIn: false,
+    isEditing: false
 }
 
 
@@ -81,6 +84,7 @@ export const reducer = (state = initialState, action) => {
           ...state,
           error: action.payload
       }
+
       case FETCH_ARTICLES_START:
         return {
             ...state,
@@ -97,6 +101,39 @@ export const reducer = (state = initialState, action) => {
             ...state,
             error: action.payload
         }
+        case EDIT_ARTICLE_START:
+          return {
+             ...state,
+             isEditing: true,
+          }
+          case EDIT_ARTICLE_SUCCESS:
+            return {
+                ...state,
+                isEditing: false,
+                deletingBoard: false,
+                boards: [...state.boards.filter(f => f.id !== action.payload)]
+            }
+            case EDIT_ARTICLE_FAIL:
+              return {
+                ...state,
+                error: action.payload
+              }
+              case FETCH_BOARD_START: 
+      return {
+          ...state,
+          isLoading: true
+      }
+      case FETCH_BOARD_SUCCESS:
+      return {
+          ...state,
+          isLoading: false,
+          boards: action.payload
+      }
+      case FETCH_BOARD_FAIL:
+      return {
+          ...state,
+          error: action.payload
+      }
     default:
         return state;
     }

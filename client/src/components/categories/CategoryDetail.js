@@ -5,15 +5,13 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { getArticles } from '../../store/actions'
 import { useParams } from 'react-router-dom'
-
+import { ArticleForm } from '../article/ArticleForm'
 
 export const CategoryDetail = () => {
     const dispatch = useDispatch()
     const articles = useSelector(state => state.articles)
      const {id} = useParams()
     
-
-console.log("ARTICLES",articles)
  
 
 useEffect(() => {
@@ -30,14 +28,15 @@ return (
             articles.length > 0 && 
             
             articles.map(article => {
-                console.log("Mapped", id);
+                // console.log("Mapped", id);
                   {
                     return (
+                        
                         <div>
-                            { article.category.categoryid === id && (
+                            <ArticleForm />
+                            {  (
                                 <div key={article.articleid}>
-                                    <h3>Title: {article.title}</h3>
-                                    <p>Topic: {article.description}</p>
+                                    <h3>{article.title}</h3>
                                     <Link to={article.imageUrl}>{article.imageUrl}</Link>
                                 </div>
                             )}
@@ -51,3 +50,4 @@ return (
         </div>
     )
 }
+// article.category.categoryid === id &&

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { editBoard } from '../../store/actions'
+import { editBoard, getBoards } from '../../store/actions'
+import { useParams } from 'react-router-dom'
 
 export const EditCategory = () => {
     const { register, handleSubmit, getValues} = useForm({
@@ -9,15 +10,15 @@ export const EditCategory = () => {
         defaultValues: {}, 
     }) 
     const dispatch = useDispatch()
-    
+    const {id} = useParams()
+
     const onSubmit = () =>{
-        // dispatch(editBoard(getValues()))
+        dispatch(editBoard(getValues()))
         }
-       
-       
-        // useEffect(() => {
-           
-        // }, [])
+      
+        useEffect(() => {
+           dispatch(getBoards(id))
+        }, [id])
 
     return (
         <div>
@@ -30,7 +31,7 @@ export const EditCategory = () => {
             ref={register}
             />
 
-            <button>Submit</button>
+            
         </form>
     </div>
     )
